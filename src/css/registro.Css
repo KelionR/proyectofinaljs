@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; 
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); 
+    color: #00ff00; 
+}
+
+
+h2 {
+    margin-top: 0;
+    color: #00ff00; 
+    text-align: center;
+    text-shadow: 0 0 10px #00ff00; 
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #00ff00; 
+    text-shadow: 0 0 5px #00ff00; 
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #00ff00; 
+    border-radius: 4px;
+    background-color: #000000; 
+    color: #00ff00; 
+    box-sizing: border-box;
+    font-size: 16px;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #00ff00; 
+    box-shadow: 0 0 5px #00ff00; 
+}
+
+/* Button Styles */
+button {
+    background-color: #00ff00; 
+    color: #000000; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 0 10px #00ff00; 
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    background-color: #00cc00; 
+    box-shadow: 0 0 15px #00ff00;
+}
+
+
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #000000; 
+    color: #00ff00;
+    border: 1px solid #00ff00; 
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0 0 10px #00ff00; 
+}
+
+a {
+    text-decoration: none;
+}
+
+a button {
+    background-color: #333333;
+    color: #00ff00;
+    box-shadow: 0 0 10px #00ff00; 
+}
+
+a button:hover {
+    background-color: #444444; 
+    box-shadow: 0 0 15px #00ff00;
+}
