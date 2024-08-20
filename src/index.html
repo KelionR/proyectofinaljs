@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<title>Ejemplo básico</title>
-	<meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas</title>
+    <link rel="stylesheet" href="EstilosListas.css">
 </head>
 
 <body>
-	<h1>La aplicación esta corriendo!</h1>
 
-	<script src="./index.js">
-	</script>
+    <div class="super">
+    
+
+        <div class="contenedorTop">
+            <div class="contenedor">
+                <h1>Formulario</h1>
+                <input type="text" id="EvenInput" placeholder="Tipo de Consulta">
+                <input type="date" id="DateInput"> 
+                <select id="prioritySelect">
+                    <option value="baja">Baja</option>
+                    <option value="media" selected>Media</option>
+                    <option value="alta">Alta</option>
+                </select>
+                <button id="EvenkButton">Agregar Consulta</button>
+                <ul id="EvenkList"></ul>
+                <p id="Evento"></p>
+                
+                <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+            </div>
+        </div>
+
+        
+        
+
+    </div>
+    
+<script src="Listas.js"></script>
 </body>
-
 </html>
