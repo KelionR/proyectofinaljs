@@ -1,0 +1,19 @@
+.estadisticas {
+    margin: 20px;
+}
+.contenidoEstadisticas {
+    margin-top: 20px;
+}
+.consulta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.consulta button {
+    margin-right: 10px;
+}
+.consulta .detalles {
+    margin-left: auto;
+}
