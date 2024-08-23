@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Función para eliminar un tiquete
+    // Función para eliminar un tiquete elegido
     window.deleteTicket = function(id) {
         let tickets = JSON.parse(localStorage.getItem('tickets')) || [];
         tickets = tickets.filter(ticket => ticket.id !== id);
