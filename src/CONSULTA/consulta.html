@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta principal</title>
+    <link rel="stylesheet" href="consulta.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Formulario de Consulta</h1>
+            <form id="consultaForm">
+                <input type="hidden" id="editar" name="editar">
+                <label for="nombre">Nombre del estudiante:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <br><br>
+
+                <label for="consulta">Consulta:</label>
+                <input type="text" id="consulta" name="consulta" required>
+                <br><br>
+
+                <label for="detalle">Detalle de consulta:</label>
+                <input type="text" id="detalle" name="detalle" required>
+                <br><br>
+
+                <label for="tipo">Tipo de consulta:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="CSS">CSS</option>
+                    <option value="HTML">HTML</option>
+                    <option value="JAVASCRIPT">JAVASCRIPT</option>
+                    <option value="OTROS">OTROS</option>
+                </select>
+                <br><br>
+
+                <label for="fecha">Fecha de consulta:</label>
+                <input type="date" id="fecha" name="fecha" required>
+                <br><br>
+
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+
+        <div class="queue-container">
+            <h2>Cola de Consultas</h2>
+            <ul id="consultaQueue">
+                <!-- Las consultas se agregarán aquí -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="consulta.js"></script>
+</body>
+</html>
