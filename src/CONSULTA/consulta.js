@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('consultaForm');
     const consultaQueue = document.getElementById('consultaQueue');
-    const apiUrl = 'http://localhost:3001/users'; // Cambia esta URL a la URL de tu API
+    const apiUrl = 'http://localhost:3001/consultas';
 
     // Cargar las consultas desde el servidor al iniciar
     loadConsultas();
@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para eliminar un tiquete en el servidor
     window.deleteTicket = function(id) {
-        fetch({apiUrl}/{id}, {
-            method: 'DELETE'
+        fetch(`${apiUrl}/${id}`, {
+            method: 'delete'
         })
         .then(() => loadConsultas())
         .catch(error => console.error('Error al eliminar el tiquete:', error));
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para editar un tiquete
     window.editTicket = function(id) {
-        fetch({apiUrl}/{id})
+        fetch(`${apiUrl}/${id}`)
             .then(response => response.json())
             .then(ticketToEdit => {
                 if (ticketToEdit) {
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para actualizar un tiquete en el servidor
     function updateTicket(id, ticket) {
-        fetch({apiUrl}/{id}, {
+        fetch(`${apiUrl}/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -129,5 +129,5 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(() => loadConsultas())
         .catch(error => console.error('Error al actualizar el tiquete:', error));
-    }
+    }
 });
