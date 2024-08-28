@@ -1,44 +1,37 @@
-import { getUsers } from "../../../SERVICIOS/GETusuarios";
-import { postUsers } from "../../../SERVICIOS/POSTusuarios";
+    import { postUsers } from "../../../SERVICIOS/POSTusuarios";
+    import { getUsers } from "../../../SERVICIOS/GETusuarios"; 
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('registroForm');
-
-    
-    form.addEventListener('submit', async (event) => {
+    document.getElementById('registroForm').addEventListener('submit', async function(event) {
         event.preventDefault(); 
 
-        const formData = new FormData(form);
 
+
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
         
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
+        const btnRegistro = document.getElementById('Boton')
+
+        const messageElement = document.getElementById('message'); 
+
+        // Verifica si todos los campos están llenos
+        if (nombre === '' || email === '' || password === '') {
+            messageElement.textContent = 'Por favor, complete todos los campos.';
+            messageElement.style.color = 'red'; 
+            return;
+        }
 
         try {
-           
-            const response = await fetch('http://localhost:3001/users', { 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            if (!response.ok) {
-                throw new Error('Error en la solicitud: ' + response.statusText);
-            }
-
-            const result = await response.json();
-
-            alert('Registro exitoso: ' + result.message);
-            form.reset(); 
-        } catch (error) {
+            await postUsers({ nombre, email, password });
             
-            console.error('Error en el registro:', error);
-            alert('Hubo un problema con el registro. Inténtalo de nuevo.');
+            // Obtiene la lista de usuarios guardados o crea una lista vacía si no hay usuarios guardados
+            let users = await getUsers() || [];
+
+            // Puedes manejar la lista de usuarios aquí si es necesario
+            console.log(users); 
+        } catch (error) {
+            messageElement.textContent = 'Ocurrió un error al enviar los datos.';
+            messageElement.style.color = 'red'; 
+            console.error('Error al enviar los datos:', error);
         }
     });
-});
