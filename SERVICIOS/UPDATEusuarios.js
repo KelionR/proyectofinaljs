@@ -21,5 +21,7 @@ async function updateUsers(nombre, apellido,id) {
         throw error;
     }
 }
+  
 
-export{updateUsers}
+
+export{updateUsers};

@@ -29,5 +29,8 @@ async function postUsers(nombre,email,password) {
         throw error;
     }
 }
+   
+
+
 
 export{postUsers}
