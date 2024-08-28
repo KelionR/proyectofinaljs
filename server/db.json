@@ -1,16 +1,3 @@
 {
-  "users": [
-    {
-      "id": "3898",
-      "nombre": "Deiler quesada Ugalde ",
-      "email": "deiler@gmail.com",
-      "password": "111111"
-    },
-    {
-      "id": "b130",
-      "nombre": "Deiler quesada Ugalde ",
-      "email": "deiler@gmail.com",
-      "password": "111111"
-    }
-  ]
+  "users": [ ]
 }
