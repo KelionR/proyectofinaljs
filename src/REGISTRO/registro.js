@@ -1,39 +1,46 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('registrationForm');
+import { postUsers } from "../../servicios/POSTusuarios";
+// import { getUsers } from "../../../servicios/GETusuarios.js"; 
 
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault(); 
+document.getElementById('registroForm').addEventListener('click', async function(event) {
+    event.preventDefault(); 
 
-        const formData = new FormData(form);
-        const data = {
-            nombre: formData.get('nombre'),
-            email: formData.get('email'),
-            password: formData.get('password'),
-        };
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    const messageElement = document.getElementById('message'); 
 
-        try {
-  
-            const response = await fetch('http://localhost:3001/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+    // Verifica si todos los campos están llenos
+    if (nombre === '' || email === '' || password === '') {
+        messageElement.textContent = 'Por favor, complete todos los campos.';
+        messageElement.style.color = 'red'; 
+        return;
+    }
 
-            if (!response.ok) {
-                throw new Error('Error en la solicitud');
-            }
+    try {
+        await postUsers({ nombre, email, password });
+        
+        // Obtiene la lista de usuarios guardados o crea una lista vacía si no hay usuarios guardados
+        let users = await getUsers() || [];
 
-            const result = await response.json();
+        // Puedes manejar la lista de usuarios aquí si es necesario
+        console.log(users); 
+    } catch (error) {
+        messageElement.textContent = 'Ocurrió un error al enviar los datos.';
+        messageElement.style.color = 'red'; 
+        console.error('Error al enviar los datos:', error);
+    }
 
-            
-            document.getElementById('message').textContent = 'Usuario registrado con éxito';
-            form.reset();
+    // Limpia los campos del formulario
+    document.getElementById('nombre').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('password').value = "";
 
-        } catch (error) {
-            console.error('Error:', error);
-            document.getElementById('message').textContent = 'Hubo un problema al registrar el usuario';
-        }
-    });
+
+    
+
+    // setTimeout(() => {
+    //     window.Location.href = "Server running at http://localhost:1234/login.js"; 
+    // }, 1000); 
+
 });
