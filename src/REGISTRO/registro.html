@@ -8,30 +8,32 @@
 </head>
 
 <body>
-        <div class="container">
-            <h2>Registro</h2>
-            <form id="registroForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre"name="nombre" required>
-                </div>
+    <div class="container">
+        <h2>Registro</h2>
+        <form id="registroForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="email">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-            
-                <div class="form-group">
-                    <button type="submit" id="btnRegistro">Registrarse</button>
-                </div>
-            </form>
-        </div>
-        <script src="registro.js"></script>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="submitButton">Registrarse</button>
+            </div>
+            <div id="message"></div>
+        </form>
+    </div>
+
+    <script type="module" src="registro.js"></script>
         
 </body>
 </html>
