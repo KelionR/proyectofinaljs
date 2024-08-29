@@ -1,4 +1,6 @@
 node_modules
 .parcel-cache
 dist
+./proyectofinaljs/.parcel-cache
+./proyectofinaljs/node_modules
 
