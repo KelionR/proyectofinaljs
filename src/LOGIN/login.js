@@ -1,58 +1,51 @@
 import { getUsers } from "../../SERVICIOS/GETusuarios";
 
+let enviarBoton = document.getElementById('enviarBTN');
 
-document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); 
+enviarBoton.addEventListener('click', async function(event) {
+    event.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-    const messageElement = document.getElementById('message'); 
+    const messageElement = document.getElementById('message');
 
     // Verifica si todos los campos están llenos
     if (email === '' || password === '') {
         messageElement.textContent = 'Por favor, complete todos los campos.';
-        messageElement.style.color = 'red'; 
+        messageElement.classList.add('error-message');
         return; // Sale de la función si hay campos vacíos
     }
 
     try {
         // Verifica las credenciales del usuario
-        let users = await getUsers() || []; 
+        let users = await getUsers();
+
         const user = users.find(user => user.email === email && user.password === password);
 
-        if (!user) {
+        if (user) {
+            // Mensaje de éxito
+            messageElement.textContent = 'Inicio de sesión exitoso.';
+            messageElement.classList.add('success-message');
+
+            // Redirige a la página principal o al dashboard después del inicio de sesión exitoso
+            setTimeout(() => {
+                window.location.href = "http://localhost:1234/consulta.html";
+            }, 1000); // Espera 1 segundo antes de redirigir
+
+            // Limpia los campos del formulario solo si la autenticación es exitosa
+            document.getElementById('email').value = "";
+            document.getElementById('password').value = "";
+
+        } else {
             // Si el usuario no se encuentra, muestra un mensaje de error
             messageElement.textContent = 'Email o contraseña incorrectos.';
-            messageElement.style.color = 'red'; 
-            return;
+            messageElement.classList.add('error-message');
         }
 
-        // Mensaje de éxito
-        messageElement.textContent = 'Inicio de sesión exitoso.';
-        messageElement.style.color = 'green'; 
-
-        // Redirige a la página principal o al dashboard después del inicio de sesión exitoso
-        setTimeout(() => {
-            window.location.href = ""; 
-        }, 1000); // Espera 1 segundo antes de redirigir
-
     } catch (error) {
-        console.error('Error al verificar las credenciales:', error);
-        messageElement.textContent = 'Ocurrió un error al verificar las credenciales.';
-        messageElement.style.color = 'red'; 
+        console.error('Error al intentar acceder al login:', error);
+        messageElement.textContent = 'Ocurrió un error al intentar acceder al login.';
+        messageElement.classList.add('error-message');
     }
-
-    // Limpia los campos del formulario
-    document.getElementById('email').value = "";
-    document.getElementById('password').value = "";
 });
-
-// Funciones simuladas para obtener y enviar datos de usuarios
-async function getUsers() {
-    // Aquí deberías hacer una solicitud a tu servidor para obtener los usuarios registrados
-    // Este código es solo un ejemplo
-    return fetch('/api/users')
-        .then(response => response.json())
-        .catch(error => console.error('Error al obtener usuarios:', error));
-}
