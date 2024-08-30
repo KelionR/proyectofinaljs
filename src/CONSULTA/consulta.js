@@ -1,133 +1,81 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('consultaForm');
-    const consultaQueue = document.getElementById('consultaQueue');
-    const apiUrl = 'http://localhost:3001/consultas';
+    const nombreInput = document.getElementById('nombre');
+    const consultaInput = document.getElementById('consulta');
+    const detalleInput = document.getElementById('detalle');
+    const tipoSelect = document.getElementById('tipo');
+    const fechaInput = document.getElementById('fecha');
+    const consultaQueueList = document.getElementById('consultaQueue');
+    const consultaForm = document.getElementById('consultaForm');
 
-    // Cargar las consultas desde el servidor al iniciar
-    loadConsultas();
+    // Función para cargar y mostrar consultas desde el servidor
+    async function loadConsultas() {
+        try {
+            const response = await fetch('http://localhost:3001/consultas');
+            if (!response.ok) throw new Error('Error al cargar las consultas');
+            const consultas = await response.json();
+            consultaQueueList.innerHTML = '';
+            consultas.forEach(_consulta => {
+                const listItem = document.createElement('li');
+                listItem.textContent = "${consulta.nombre}" - "${consulta.consulta}" - "${consulta.detalle}" - "${consulta.fecha}" - "${consulta.tipo}";
+                consultaQueueList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Evita el envío predeterminado del formulario
+    // Función para agregar una nueva consulta al servidor
+    async function addConsulta(event) {
+        event.preventDefault();
 
-        // Obtén los datos del formulario
-        const id = document.getElementById('editar').value;
-        const nombre = document.getElementById('nombre').value;
-        const consulta = document.getElementById('consulta').value;
-        const detalle = document.getElementById('detalle').value;
-        const tipo = document.getElementById('tipo').value;
-        const fecha = document.getElementById('fecha').value;
-        const hora = new Date().toLocaleTimeString(); // Obtiene la hora actual
+        const nombre = nombreInput.value.trim();
+        const consulta = consultaInput.value.trim();
+        const detalle = detalleInput.value.trim();
+        const tipo = tipoSelect.value;
+        const fecha = fechaInput.value;
 
-        const ticket = {
+        if (!nombre || !consulta || !detalle || !tipo || !fecha) {
+            alert('Por favor complete todos los campos.');
+            return;
+        }
+
+        const nuevaConsulta = {
             nombre,
             consulta,
             detalle,
             tipo,
             fecha,
-            hora
+            hora: new Date().toLocaleTimeString()
         };
 
-        if (id) {
-            // Actualiza el tiquete existente
-            updateTicket(id, ticket);
-        } else {
-            // Guarda un nuevo tiquete
-            createTicket(ticket);
+        try {
+            const response = await fetch('http://localhost:3001/consultas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevaConsulta)
+            });
+
+            if (!response.ok) throw new Error('Error al agregar la consulta');
+
+            // Limpiar el formulario
+            nombreInput.value = '';
+            consultaInput.value = '';
+            detalleInput.value = '';
+            tipoSelect.value = '';
+            fechaInput.value = '';
+
+            // Volver a cargar la lista de consultas
+            loadConsultas();
+        } catch (error) {
+            console.error('Error:', error);
         }
-
-        // Limpiar el formulario
-        form.reset();
-        document.getElementById('editar').value = '';
-    });
-
-    // Función para crear un nuevo tiquete en el servidor
-    function createTicket(ticket) {
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ticket)
-        })
-        .then(response => response.json())
-        .then(newTicket => {
-            // Añadir el nuevo tiquete a la cola de consultas
-            addTicketToQueue(newTicket);
-        })
-        .catch(error => console.error('Error al crear el tiquete:', error));
     }
 
-    // Función para cargar las consultas desde el servidor
-    function loadConsultas() {
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(tickets => {
-                consultaQueue.innerHTML = ''; // Limpiar la cola antes de recargar
-                
-                tickets.forEach(ticket => {
-                    addTicketToQueue(ticket);
-                });
-            })
-            .catch(error => console.error('Error al cargar las consultas:', error));
-    }
+    // Agregar eventos al formulario
+    consultaForm.addEventListener('submit', addConsulta);
 
-    // Función para añadir un tiquete a la cola de consultas
-    function addTicketToQueue(ticket) {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <div>
-                <strong>Nombre:</strong> ${ticket.nombre}<br>
-                <strong>Consulta:</strong> ${ticket.consulta}<br>
-                <strong>Detalle:</strong> ${ticket.detalle}<br>
-                <strong>Tipo:</strong> ${ticket.tipo}<br>
-                <strong>Fecha:</strong> ${ticket.fecha}<br>
-                <strong>Hora:</strong> ${ticket.hora}
-            </div>
-            <div class="actions">
-                <button onclick="editTicket(${ticket.id})">Editar</button>
-                <button onclick="deleteTicket(${ticket.id})">Eliminar</button>
-            </div>
-        `;
-        consultaQueue.appendChild(listItem);
-    }
-
-    // Función para eliminar un tiquete en el servidor
-    window.deleteTicket = function(id) {
-        fetch(`${apiUrl}/${id}`, {
-            method: 'delete'
-        })
-        .then(() => loadConsultas())
-        .catch(error => console.error('Error al eliminar el tiquete:', error));
-    };
-
-    // Función para editar un tiquete
-    window.editTicket = function(id) {
-        fetch(`${apiUrl}/${id}`)
-            .then(response => response.json())
-            .then(ticketToEdit => {
-                if (ticketToEdit) {
-                    // Rellena el formulario con los datos del tiquete
-                    document.getElementById('editar').value = ticketToEdit.id;
-                    document.getElementById('nombre').value = ticketToEdit.nombre;
-                    document.getElementById('consulta').value = ticketToEdit.consulta;
-                    document.getElementById('detalle').value = ticketToEdit.detalle;
-                    document.getElementById('tipo').value = ticketToEdit.tipo;
-                    document.getElementById('fecha').value = ticketToEdit.fecha;
-                }
-            })
-            .catch(error => console.error('Error al editar el tiquete:', error));
-    };
-
-    // Función para actualizar un tiquete en el servidor
-    function updateTicket(id, ticket) {
-        fetch(`${apiUrl}/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ticket)
-        })
-        .then(() => loadConsultas())
-        .catch(error => console.error('Error al actualizar el tiquete:', error));
-    }
+    // Cargar consultas al inicio
+    loadConsultas();
 });

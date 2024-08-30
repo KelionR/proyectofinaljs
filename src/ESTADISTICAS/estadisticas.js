@@ -1,11 +1,5 @@
 function cargarEstadisticas() {
-    const apiUrl = 'http://localhost:3001/consultas';
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(consultas => {
-            const contenedor = document.querySelector('.contenidoEstadisticas');
-            contenedor.innerHTML = '';
 
             // Filtrar las consultas de los últimos 3 días
             const fechaLimite = new Date();
@@ -54,24 +48,4 @@ function cargarEstadisticas() {
                 // Agrega el contenedor de consulta al contenedor principal
                 contenedor.appendChild(divConsulta);
             });
-        })
-        .catch(error => console.error('Error al cargar las estadísticas:', error));
-}
-
-// Función para eliminar una consulta
-function deleteConsulta(id) {
-    const apiUrl = http://localhost:3001/consultas/${id}; // Cambia esta URL a la URL de tu API
-    fetch(apiUrl, {
-        method: 'DELETE'
-    })
-    .then(() => cargarEstadisticas())
-    .catch(error => console.error('Error al eliminar la consulta:', error));
-}
-
-// Función para editar una consulta
-function editConsulta(id) {
-    // Redirige a la página de edición de consulta
-    window.location.href = editar_consulta.html?id=${id};
-}
-
-window.onload = cargarEstadisticas;
+        }
