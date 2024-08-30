@@ -1,20 +1,95 @@
-.estadisticas {
+body {
+    font-family: Arial, sans-serif;
     margin: 20px;
-}
-.contenidoEstadisticas {
-    margin-top: 20px;
-}
-.consulta {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-}
-.consulta button {
-    margin-right: 10px;
-}
-.consulta .detalles {
-    margin-left: auto;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+td {
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #c82333;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        display: block;
+        padding: 10px;
+        text-align: right;
+    }
+
+    td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+    }
+}
