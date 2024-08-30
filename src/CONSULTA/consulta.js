@@ -1,81 +1,79 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const nombreInput = document.getElementById('nombre');
-    const consultaInput = document.getElementById('consulta');
-    const detalleInput = document.getElementById('detalle');
-    const tipoSelect = document.getElementById('tipo');
-    const fechaInput = document.getElementById('fecha');
-    const consultaQueueList = document.getElementById('consultaQueue');
-    const consultaForm = document.getElementById('consultaForm');
+import { postconsulta } from '../../SERVIcIOS/postconsultas.js';
+import { getconsultas } from '../../SERVIcIOS/getconsulta.js';
+// import { updateconsulta } from '../../SERVIcIOS/updateconsulta.js';
+// import { deleteconsulta } from '../../SERVIcIOS/delete.consulta.js';
 
-    // Función para cargar y mostrar consultas desde el servidor
-    async function loadConsultas() {
-        try {
-            const response = await fetch('http://localhost:3001/consultas');
-            if (!response.ok) throw new Error('Error al cargar las consultas');
-            const consultas = await response.json();
-            consultaQueueList.innerHTML = '';
-            consultas.forEach(_consulta => {
-                const listItem = document.createElement('li');
-                listItem.textContent = "${consulta.nombre}" - "${consulta.consulta}" - "${consulta.detalle}" - "${consulta.fecha}" - "${consulta.tipo}";
-                consultaQueueList.appendChild(listItem);
-            });
-        } catch (error) {
-            console.error('Error:', error);
-        }
+// Función para cargar y mostrar consultas desde el servidor
+const consultaconsList = document.getElementById('consultacons');
+
+async function loadconsultas() {
+  try {
+    const consultas = await getconsultas();
+
+    consultaconsList.innerHTML = '';
+
+    for (const element of consultas) {
+      const listItem = document.createElement('li');
+      listItem.textContent =`${element.nombre} - ${element.consulta} - ${element.detalle} - ${element.fecha} - ${element.tipo}`;
+      consultaconsList.appendChild(listItem);
     }
+    // consultas.forEach(element => {
+      
+    // });
 
-    // Función para agregar una nueva consulta al servidor
-    async function addConsulta(event) {
-        event.preventDefault();
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
-        const nombre = nombreInput.value.trim();
-        const consulta = consultaInput.value.trim();
-        const detalle = detalleInput.value.trim();
-        const tipo = tipoSelect.value;
-        const fecha = fechaInput.value;
+// Función para agregar una nueva consulta al servidor
+async function addconsulta(event) {
+  event.preventDefault();
 
-        if (!nombre || !consulta || !detalle || !tipo || !fecha) {
-            alert('Por favor complete todos los campos.');
-            return;
-        }
+  const nombre = document.getElementById('nombre').value;
+  const consulta = document.getElementById('consulta').value;
+  const detalle = document.getElementById('detalle').value;
+  const tipo = document.getElementById('tipo').value;
+  const fecha = document.getElementById('fecha').value;
 
-        const nuevaConsulta = {
-            nombre,
-            consulta,
-            detalle,
-            tipo,
-            fecha,
-            hora: new Date().toLocaleTimeString()
-        };
-
-        try {
-            const response = await fetch('http://localhost:3001/consultas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(nuevaConsulta)
-            });
-
-            if (!response.ok) throw new Error('Error al agregar la consulta');
-
-            // Limpiar el formulario
-            nombreInput.value = '';
-            consultaInput.value = '';
-            detalleInput.value = '';
-            tipoSelect.value = '';
-            fechaInput.value = '';
-
-            // Volver a cargar la lista de consultas
-            loadConsultas();
-        } catch (error) {
-            console.error('Error:', error);
-        }
+  if (!nombre || !consulta || !detalle || !tipo || !fecha) {
+    alert('Por favor complete todos los campos.');
+    return;
+  }else{
+    try {
+      await postconsulta(nombre, consulta, detalle, tipo, fecha);
+  
+      loadconsultas();
+    } catch (error) {
+      console.error('Error:', error);
     }
+  }
 
-    // Agregar eventos al formulario
-    consultaForm.addEventListener('submit', addConsulta);
+}
 
-    // Cargar consultas al inicio
-    loadConsultas();
-});
+// Función para actualizar una consulta
+// async function updateconsultas() {
+//   try {
+//     await updateconsulta(id, nombre, apellido);
+//     loadconsultas();
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// Función para eliminar una consulta
+// async function deleteconsultas() {
+//   try {
+//     await deleteconsulta(id);
+//     loadconsultas();
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// Agregar eventos al formulario
+const consultaForm = document.getElementById('consultaForm');
+consultaForm.addEventListener('submit', addconsulta);
+
+// Cargar consultas al inicio
+loadconsultas();

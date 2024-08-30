@@ -1,28 +1,23 @@
 {
-  "users": [
+
+  "users": [],
+  "consultas": [
     {
-      "id": "4794",
-      "nombre": "Deiler quesada Ugalde ",
-      "email": "deiler@gmail.com",
-      "password": "12345"
+      "id": "fbf4",
+      "nombre": "Nicole Briceño",
+      "consulta": "No puedo usar algo",
+      "detalle": "Soy extremadamente tonto",
+      "tipo": "HTML",
+      "fecha": "2024-08-23"
     },
     {
-      "id": "8c2c",
-      "nombre": "Deiler quesada Ugalde ",
-      "email": "deiler1234@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "898d",
-      "nombre": "",
-      "email": "",
-      "password": ""
-    },
-    {
-      "id": "e1b8",
-      "nombre": "Deiler quesada Ugalde ",
-      "email": "pedrito@gmail.com",
-      "password": "1234"
+      "id": "2a26",
+      "nombre": "Nicole Briceño",
+      "consulta": "No puedo usar algo",
+      "detalle": "Soy extremadamente tonto",
+      "tipo": "HTML",
+      "fecha": "2024-08-23"
     }
   ]
 }
+
