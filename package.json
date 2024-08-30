@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "json-server --watch server/db.json --port 3001",
-    "start": "npx parcel src/LOGIN/Login.html && npx parcel src/REGISTRO/registro.html && npx parcel src/CONSULTA/consulta.html && npx parcel src/ESTADISTICAS/estadisticas.html"
+    "start": "npx parcel src/REGISTRO/registro.html"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,15 @@
+{
+  "users": [
+   
+  ],
+  "consultas": [
+    {
+      "id": "9c55",
+      "nombre": "nicol",
+      "consulta": "js",
+      "detalle": "no sirve ",
+      "tipo": "JAVASCRIPT",
+      "fecha": "2024-08-30"
+    }
+  ]
+}
