@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "server": "json-server --watch server/db.json --port 3001",
     "start": "npx parcel src/REGISTRO/registro.html"
   },
   "keywords": [],

@@ -1,23 +1,15 @@
 {
-
-  "users": [],
+  "users": [
+   
+  ],
   "consultas": [
     {
-      "id": "fbf4",
-      "nombre": "Nicole Briceño",
-      "consulta": "No puedo usar algo",
-      "detalle": "Soy extremadamente tonto",
-      "tipo": "HTML",
-      "fecha": "2024-08-23"
-    },
-    {
-      "id": "2a26",
-      "nombre": "Nicole Briceño",
-      "consulta": "No puedo usar algo",
-      "detalle": "Soy extremadamente tonto",
-      "tipo": "HTML",
-      "fecha": "2024-08-23"
+      "id": "9c55",
+      "nombre": "nicol",
+      "consulta": "js",
+      "detalle": "no sirve ",
+      "tipo": "JAVASCRIPT",
+      "fecha": "2024-08-30"
     }
   ]
 }
-
