@@ -11,7 +11,6 @@
         <div class="form-container">
             <h1>Formulario de Consulta</h1>
             <form id="consultaForm">
-                <input type="hidden" id="editar" name="editar">
                 <label for="nombre">Nombre del estudiante:</label>
                 <input type="text" id="nombre" name="nombre" required>
                 <br><br>
@@ -38,7 +37,7 @@
                 <input type="date" id="fecha" name="fecha" required>
                 <br><br>
 
-                <input type="submit" value="Enviar">
+                <button type="submit" id="enviarConsulta">Enviar</button>
             </form>
         </div>
 
@@ -50,6 +49,6 @@
         </div>
     </div>
 
-    <script src="consulta.js"></script>
+    <script src="consulta.js" type="module"></script>
 </body>
 </html>
