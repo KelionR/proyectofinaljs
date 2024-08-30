@@ -1,3 +1,8 @@
+import { updateconsulta } from '../../SERVICIOS/updateconsulta.js'
+import { postconsulta } from '../../SERVICIOS/postconsultas.js'
+import { getconsulta } from '../../SERVICIOS/getconsulta.js'
+import { deleteconsulta } from '../../SERVICIOS/delete.consulta.js'
+
 document.addEventListener('DOMContentLoaded', () => {
     const nombreInput = document.getElementById('nombre');
     const consultaInput = document.getElementById('consulta');

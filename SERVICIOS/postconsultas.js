@@ -1,5 +1,3 @@
-// postConsultas.js
-
 async function postconsultas(nombre, consulta, detalle, tipo, fecha) {
     try {
         const consultData = { 
