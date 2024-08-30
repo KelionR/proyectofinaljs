@@ -1,5 +1,3 @@
-//////////////LLAMADO GET/////////////
-
 async function getUsers() {
     try {
         const response = await fetch('http://localhost:3001/users', {

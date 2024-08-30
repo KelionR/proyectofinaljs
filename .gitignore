@@ -3,4 +3,10 @@ node_modules
 dist
 ./proyectofinaljs/.parcel-cache
 ./proyectofinaljs/node_modules
+<<<<<<< HEAD
 ./proyectofinaljs/dist
+=======
+
+./proyecofinaljs/dist
+./proyecofinaljs/.parcel-cache
+>>>>>>> ade577b625a3385e4fc6882109d867c94db93a97
