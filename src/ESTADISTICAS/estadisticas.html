@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadisticas</title>
-    <link rel="stylesheet" href="css/estadisticas.css">
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="./estadisticas.css">
+    
  </head>
  <body>
-     <h1>Estadisticas Diarias de Consultas</h1>
-    <div class="estadisticas">
-        <div class="contenidoEstadisticas">
-            <!-- Los datos del local storage se agregarán aquí -->
-        </div>
-    </div>
-
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo de Consulta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#</td>
+                <td>Css</td>
+                <td><button onclick="eliminarFila(this)">Eliminar</button></td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Html</td>
+                <td><button onclick="eliminarFila(this)">Eliminar</button></td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Javascript</td>
+                <td><button onclick="eliminarFila(this)">Eliminar</button></td>
+            </tr>
+            <tr>
+                <td>#</td>
+                <td>Otros</td>
+                <td><button onclick="eliminarFila(this)">Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>
     <script src="estadisticas.js"></script>
  </body>
  </html>

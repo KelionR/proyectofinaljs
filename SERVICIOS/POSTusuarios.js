@@ -1,7 +1,7 @@
 //////////////LLAMADO POST/////////////
 
 
-async function postUsers(nombre,email,password) {
+async function postUsers(nombre, email, password) {
     try {
      
         const userData = { 
