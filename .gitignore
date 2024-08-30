@@ -3,4 +3,4 @@ node_modules
 dist
 ./proyectofinaljs/.parcel-cache
 ./proyectofinaljs/node_modules
-
+./proyectofinaljs/dist
