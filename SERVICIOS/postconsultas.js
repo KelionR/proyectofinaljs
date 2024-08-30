@@ -1,30 +1,29 @@
-async function postconsultas(nombre, consulta, detalle, tipo, fecha) {
-    try {
-        const consultData = { 
-            nombre,
-            consulta,
-            detalle,
-            tipo,
-            fecha
-        };
+async function postconsulta (nombre, consulta, detalle, tipo, fecha) {
+  try {
+   
+      const consultasData = { 
+        nombre, consulta, detalle, tipo, fecha
+      };
 
-        const response = await fetch("http://localhost:3001/consultas", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(consultData)
-        });
+      const response = await fetch("http://localhost:3001/consultas", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(consultasData)
+      });
 
-        if (!response.ok) {
-            throw new Error('Error posting consulta');
-        }
+   
+      return await response.json();
 
-        return await response.json();
-    } catch (error) {
-        console.error('Error posting consulta:', error);
-        throw error;
-    }
+      
+  } catch (error) {
+      console.error('Error posting user:', error);
+      throw error;
+  }
 }
+ 
 
-export { postconsultas };
+
+
+export{postconsulta}
